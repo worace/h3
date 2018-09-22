@@ -368,6 +368,7 @@ static const int unitScaleByCIIres[] = {
  */
 void _geoToFaceIjk(const GeoCoord* g, int res, FaceIJK* h) {
     // first convert to hex2d
+  printf("~~~ 1 - _geoToFaceIjk\n");
     Vec2d v;
     _geoToHex2d(g, res, &h->face, &v);
 
@@ -385,32 +386,59 @@ void _geoToFaceIjk(const GeoCoord* g, int res, FaceIJK* h) {
  * @param v The 2D hex coordinates of the cell containing the point.
  */
 void _geoToHex2d(const GeoCoord* g, int res, int* face, Vec2d* v) {
+  printf("~~~ 2 - _geoToHex2d\n");
+  printf("~~~ Coord: (%f, %f)", g->lat, g->lon);
     Vec3d v3d;
     _geoToVec3d(g, &v3d);
 
+  printf("~~~ 4 - Determine icosahedron face\n");
     // determine the icosahedron face
     *face = 0;
     double sqd = _pointSquareDist(&faceCenterPoint[0], &v3d);
+
+    /* printf("~~~ Starting with face 0: (%f, %f, %f)\n", faceCenterPoint[0].x, faceCenterPoint[0].y, faceCenterPoint[0].z); */
+    /* printf("~~~ initial dist: %f\n", sqd); */
     for (int f = 1; f < NUM_ICOSA_FACES; f++) {
+      /* printf("~~~ face index %d: unit sphere coords: (%f, %f, %f)\n", f, faceCenterPoint[f].x, faceCenterPoint[f].y, faceCenterPoint[f].z); */
         double sqdT = _pointSquareDist(&faceCenterPoint[f], &v3d);
+        /* printf("~~~ new dist: %f\n", sqdT); */
         if (sqdT < sqd) {
             *face = f;
             sqd = sqdT;
         }
     }
+    printf("~~~ Final closest face for point: (%f, %f, %f) -- (%f, %f, %f)\n",
+           v3d.x, v3d.y, v3d.z,
+           faceCenterPoint[0].x, faceCenterPoint[0].y, faceCenterPoint[0].z);
+    printf("~~~ Final dist: %f\n", sqd);
 
     // cos(r) = 1 - 2 * sin^2(r/2) = 1 - 2 * (sqd / 4) = 1 - sqd/2
     double r = acos(1 - sqd / 2);
+    // R is...radius? Grid resolution?
+    printf("~~~ Radius from square dist: %f\n", r);
 
     if (r < EPSILON) {
+      // Point is close enough to cell 0,0 to use that coordinate
+      printf("~~~ Radius %f less than EPSILON: %f, return 0\n", r, EPSILON);
         v->x = v->y = 0.0L;
         return;
     }
+
+
+/** @brief icosahedron face ijk axes as azimuth in radians from face center to
+ * vertex 0/1/2 respectively
+ */
+
+    printf("### Face center lat,lon: (%f, %f)\n", faceCenterGeo[*face].lat, faceCenterGeo[*face].lon);
+    // I Axis (axis 0) is horizontal aligned?
+    printf("### Face Axis radians to axis 0 (Clockwise from north?): %f\n", faceAxesAzRadsCII[*face][0]);
+    /* printf("~~~ Face Axis Class II radians: ", faceAxesAzRadsCII[*face][0]); */
 
     // now have face and r, now find CCW theta from CII i-axis
     double theta =
         _posAngleRads(faceAxesAzRadsCII[*face][0] -
                       _posAngleRads(_geoAzimuthRads(&faceCenterGeo[*face], g)));
+    printf("### Theta between face primary axis (%f) and R (%f) = (%f)\n", faceAxesAzRadsCII[*face][0], r, theta);
 
     // adjust theta for Class III (odd resolutions)
     if (isResClassIII(res)) theta = _posAngleRads(theta - M_AP7_ROT_RADS);

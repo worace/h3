@@ -47,9 +47,13 @@ double _pointSquareDist(const Vec3d* v1, const Vec3d* v2) {
  * @param v The 3D coordinate of the point.
  */
 void _geoToVec3d(const GeoCoord* geo, Vec3d* v) {
+  printf("~~~ 3 - _geoToVec3d\n");
+  printf("~~~ Get 3d (x,y,z) coords for lat/lon in rads\n");
     double r = cos(geo->lat);
 
     v->z = sin(geo->lat);
     v->x = cos(geo->lon) * r;
     v->y = sin(geo->lon) * r;
+    printf("~~~ (x,y,z) for rads (%f, %f)\n", geo->lat, geo->lon);
+    printf("~~~ (%f, %f, %f)\n", v->x, v->y, v->z);
 }

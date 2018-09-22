@@ -129,51 +129,52 @@ set(EXAMPLE_SOURCE_FILES
     examples/compact.c
     examples/edge.c)
 set(OTHER_SOURCE_FILES
-    src/apps/filters/h3ToGeo.c
-    src/apps/filters/h3ToIjk.c
-    src/apps/filters/h3ToComponents.c
-    src/apps/filters/geoToH3.c
-    src/apps/filters/h3ToGeoBoundary.c
-    src/apps/filters/kRing.c
-    src/apps/filters/hexRange.c
-    src/apps/testapps/testVertexGraph.c
-    src/apps/testapps/testCompact.c
-    src/apps/testapps/testPolyfill.c
-    src/apps/testapps/testKRing.c
-    src/apps/testapps/testH3ToGeoBoundary.c
-    src/apps/testapps/testH3ToParent.c
-    src/apps/testapps/testH3Index.c
-    src/apps/testapps/mkRandGeoBoundary.c
+    # src/apps/filters/h3ToGeo.c
+    # src/apps/filters/h3ToIjk.c
+    # src/apps/filters/h3ToComponents.c
+    # src/apps/filters/geoToH3.c
+    # src/apps/filters/h3ToGeoBoundary.c
+    # src/apps/filters/kRing.c
+    # src/apps/filters/hexRange.c
+    # src/apps/testapps/testVertexGraph.c
+    # src/apps/testapps/testCompact.c
+    # src/apps/testapps/testPolyfill.c
+    # src/apps/testapps/testKRing.c
+    # src/apps/testapps/testH3ToGeoBoundary.c
+    # src/apps/testapps/testH3ToParent.c
+    # src/apps/testapps/testH3Index.c
+    # src/apps/testapps/mkRandGeoBoundary.c
     src/apps/testapps/testGeoToH3.c
-    src/apps/testapps/testH3NeighborRotations.c
-    src/apps/testapps/testMaxH3ToChildrenSize.c
-    src/apps/testapps/testHexRanges.c
-    src/apps/testapps/testH3ToGeo.c
-    src/apps/testapps/testH3ToChildren.c
-    src/apps/testapps/testGeoCoord.c
-    src/apps/testapps/testHexRing.c
-    src/apps/testapps/testH3SetToVertexGraph.c
-    src/apps/testapps/testBBox.c
-    src/apps/testapps/testPolygon.c
-    src/apps/testapps/testVec2d.c
-    src/apps/testapps/testVec3d.c
-    src/apps/testapps/testH3UniEdge.c
-    src/apps/testapps/testLinkedGeo.c
-    src/apps/testapps/mkRandGeo.c
-    src/apps/testapps/testH3Api.c
-    src/apps/testapps/testH3SetToLinkedGeo.c
-    src/apps/testapps/testH3ToIjk.c
-    src/apps/miscapps/h3ToGeoBoundaryHier.c
-    src/apps/miscapps/h3ToGeoHier.c
-    src/apps/miscapps/generateBaseCellNeighbors.c
-    src/apps/miscapps/generateNumHexagons.c
-    src/apps/miscapps/generateFaceCenterPoint.c
-    src/apps/miscapps/h3ToHier.c
-    src/apps/benchmarks/benchmarkPolyfill.c
-    src/apps/benchmarks/benchmarkPolygon.c
-    src/apps/benchmarks/benchmarkH3SetToLinkedGeo.c
-    src/apps/benchmarks/benchmarkKRing.c
-    src/apps/benchmarks/benchmarkH3Api.c)
+    # src/apps/testapps/testH3NeighborRotations.c
+    # src/apps/testapps/testMaxH3ToChildrenSize.c
+    # src/apps/testapps/testHexRanges.c
+    # src/apps/testapps/testH3ToGeo.c
+    # src/apps/testapps/testH3ToChildren.c
+    # src/apps/testapps/testGeoCoord.c
+    # src/apps/testapps/testHexRing.c
+    # src/apps/testapps/testH3SetToVertexGraph.c
+    # src/apps/testapps/testBBox.c
+    # src/apps/testapps/testPolygon.c
+    # src/apps/testapps/testVec2d.c
+    # src/apps/testapps/testVec3d.c
+    # src/apps/testapps/testH3UniEdge.c
+    # src/apps/testapps/testLinkedGeo.c
+    # src/apps/testapps/mkRandGeo.c
+    # src/apps/testapps/testH3Api.c
+    # src/apps/testapps/testH3SetToLinkedGeo.c
+    # src/apps/testapps/testH3ToIjk.c
+    # src/apps/miscapps/h3ToGeoBoundaryHier.c
+    # src/apps/miscapps/h3ToGeoHier.c
+    # src/apps/miscapps/generateBaseCellNeighbors.c
+    # src/apps/miscapps/generateNumHexagons.c
+    # src/apps/miscapps/generateFaceCenterPoint.c
+    # src/apps/miscapps/h3ToHier.c
+    # src/apps/benchmarks/benchmarkPolyfill.c
+    # src/apps/benchmarks/benchmarkPolygon.c
+    # src/apps/benchmarks/benchmarkH3SetToLinkedGeo.c
+    # src/apps/benchmarks/benchmarkKRing.c
+    # src/apps/benchmarks/benchmarkH3Api.c
+    )
 
 set(ALL_SOURCE_FILES
     ${LIB_SOURCE_FILES} ${APP_SOURCE_FILES} ${OTHER_SOURCE_FILES})
@@ -440,31 +441,31 @@ if(BUILD_TESTING)
         add_h3_test_with_file(testH3ToGeoBoundary src/apps/testapps/testH3ToGeoBoundary.c ${file})
     endforeach()
 
-    add_h3_test(testCompact src/apps/testapps/testCompact.c)
-    add_h3_test(testKRing src/apps/testapps/testKRing.c)
-    add_h3_test(testHexRing src/apps/testapps/testHexRing.c)
-    add_h3_test(testHexRanges src/apps/testapps/testHexRanges.c)
-    add_h3_test(testH3ToParent src/apps/testapps/testH3ToParent.c)
-    add_h3_test(testH3ToChildren src/apps/testapps/testH3ToChildren.c)
-    add_h3_test(testMaxH3ToChildrenSize src/apps/testapps/testMaxH3ToChildrenSize.c)
-    add_h3_test(testH3Index src/apps/testapps/testH3Index.c)
-    add_h3_test(testH3Api src/apps/testapps/testH3Api.c)
-    add_h3_test(testH3SetToLinkedGeo src/apps/testapps/testH3SetToLinkedGeo.c)
-    add_h3_test(testH3SetToVertexGraph src/apps/testapps/testH3SetToVertexGraph.c)
-    add_h3_test(testLinkedGeo src/apps/testapps/testLinkedGeo.c)
-    add_h3_test(testPolyfill src/apps/testapps/testPolyfill.c)
-    add_h3_test(testVertexGraph src/apps/testapps/testVertexGraph.c)
-    add_h3_test(testH3UniEdge src/apps/testapps/testH3UniEdge.c)
-    add_h3_test(testGeoCoord src/apps/testapps/testGeoCoord.c)
-    add_h3_test(testBBox src/apps/testapps/testBBox.c)
-    add_h3_test(testPolygon src/apps/testapps/testPolygon.c)
-    add_h3_test(testVec2d src/apps/testapps/testVec2d.c)
-    add_h3_test(testVec3d src/apps/testapps/testVec3d.c)
-    add_h3_test(testH3ToIjk src/apps/testapps/testH3ToIjk.c)
+    # add_h3_test(testCompact src/apps/testapps/testCompact.c)
+    # add_h3_test(testKRing src/apps/testapps/testKRing.c)
+    # add_h3_test(testHexRing src/apps/testapps/testHexRing.c)
+    # add_h3_test(testHexRanges src/apps/testapps/testHexRanges.c)
+    # add_h3_test(testH3ToParent src/apps/testapps/testH3ToParent.c)
+    # add_h3_test(testH3ToChildren src/apps/testapps/testH3ToChildren.c)
+    # add_h3_test(testMaxH3ToChildrenSize src/apps/testapps/testMaxH3ToChildrenSize.c)
+    # add_h3_test(testH3Index src/apps/testapps/testH3Index.c)
+    # add_h3_test(testH3Api src/apps/testapps/testH3Api.c)
+    # add_h3_test(testH3SetToLinkedGeo src/apps/testapps/testH3SetToLinkedGeo.c)
+    # add_h3_test(testH3SetToVertexGraph src/apps/testapps/testH3SetToVertexGraph.c)
+    # add_h3_test(testLinkedGeo src/apps/testapps/testLinkedGeo.c)
+    # add_h3_test(testPolyfill src/apps/testapps/testPolyfill.c)
+    # add_h3_test(testVertexGraph src/apps/testapps/testVertexGraph.c)
+    # add_h3_test(testH3UniEdge src/apps/testapps/testH3UniEdge.c)
+    # add_h3_test(testGeoCoord src/apps/testapps/testGeoCoord.c)
+    # add_h3_test(testBBox src/apps/testapps/testBBox.c)
+    # add_h3_test(testPolygon src/apps/testapps/testPolygon.c)
+    # add_h3_test(testVec2d src/apps/testapps/testVec2d.c)
+    # add_h3_test(testVec3d src/apps/testapps/testVec3d.c)
+    # add_h3_test(testH3ToIjk src/apps/testapps/testH3ToIjk.c)
 
-    add_h3_test_with_arg(testH3NeighborRotations src/apps/testapps/testH3NeighborRotations.c 0)
-    add_h3_test_with_arg(testH3NeighborRotations src/apps/testapps/testH3NeighborRotations.c 1)
-    add_h3_test_with_arg(testH3NeighborRotations src/apps/testapps/testH3NeighborRotations.c 2)
+    # add_h3_test_with_arg(testH3NeighborRotations src/apps/testapps/testH3NeighborRotations.c 0)
+    # add_h3_test_with_arg(testH3NeighborRotations src/apps/testapps/testH3NeighborRotations.c 1)
+    # add_h3_test_with_arg(testH3NeighborRotations src/apps/testapps/testH3NeighborRotations.c 2)
 
     # Miscellaneous testing applications
     add_h3_executable(mkRandGeo src/apps/testapps/mkRandGeo.c ${APP_SOURCE_FILES})

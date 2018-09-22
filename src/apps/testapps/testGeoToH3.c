@@ -49,6 +49,7 @@ int main(int argc, char* argv[]) {
     char buff[BUFF_SIZE];
     char h3Str[BUFF_SIZE];
     while (1) {
+      printf("**** testGeoToH3");
         // get an index from stdin
         if (!fgets(buff, BUFF_SIZE, stdin)) {
             if (feof(stdin))

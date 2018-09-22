@@ -651,6 +651,7 @@ H3Index _faceIjkToH3(const FaceIJK* fijk, int res) {
  * @return The encoded H3Index (or 0 on failure).
  */
 H3Index H3_EXPORT(geoToH3)(const GeoCoord* g, int res) {
+  printf("~~~ API: geoToH3 (%f, %f)\n", g->lat, g->lon);
     if (res < 0 || res > MAX_H3_RES) {
         return H3_INVALID_INDEX;
     }
