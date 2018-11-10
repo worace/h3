@@ -138,6 +138,8 @@ void _hex2dToCoordIJK(const Vec2d* v, CoordIJK* h) {
         h->j = -1 * h->j;
     }
 
+
+    printf("ijkijk%.15f\t%.15f\t%d\t%d\t%d\n", v->x, v->y, h->i, h->j, h->k);
     _ijkNormalize(h);
 }
 
@@ -212,6 +214,9 @@ void _ijkScale(CoordIJK* c, int factor) {
  * @param c The ijk coordinates to normalize.
  */
 void _ijkNormalize(CoordIJK* c) {
+  int i_raw = c->i;
+  int j_raw = c->j;
+  int k_raw = c->k;
     // remove any negative values
     if (c->i < 0) {
         c->j -= c->i;
@@ -240,6 +245,7 @@ void _ijkNormalize(CoordIJK* c) {
         c->j -= min;
         c->k -= min;
     }
+    printf("norm_%d\t%d\t%d\t%d\t%d\t%d\n", i_raw, j_raw, k_raw, c->i, c->j, c->k);
 }
 
 /**

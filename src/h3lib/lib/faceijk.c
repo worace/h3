@@ -429,7 +429,7 @@ void _geoToHex2d(const GeoCoord* g, int res, int* face, Vec2d* v) {
  * vertex 0/1/2 respectively
  */
 
-    printf("### Face center lat,lon: (%f, %f)\n", faceCenterGeo[*face].lat, faceCenterGeo[*face].lon);
+    printf("### Face: %d center lat,lon: (%f, %f)\n", *face, faceCenterGeo[*face].lat, faceCenterGeo[*face].lon);
     // I Axis (axis 0) is horizontal aligned?
     printf("### Face Axis radians to axis 0 (Clockwise from north?): %f\n", faceAxesAzRadsCII[*face][0]);
     /* printf("~~~ Face Axis Class II radians: ", faceAxesAzRadsCII[*face][0]); */
@@ -438,6 +438,15 @@ void _geoToHex2d(const GeoCoord* g, int res, int* face, Vec2d* v) {
     double theta =
         _posAngleRads(faceAxesAzRadsCII[*face][0] -
                       _posAngleRads(_geoAzimuthRads(&faceCenterGeo[*face], g)));
+
+    double _geo_azimuth = _geoAzimuthRads(&faceCenterGeo[*face], g);
+    double _pos_angle = _posAngleRads(_geo_azimuth);
+    /* if (_geo_azimuth != _pos_angle) { */
+    /*   printf("~~~ POSANGLE %f vs %f\n", _geo_azimuth, _pos_angle); */
+    /* } */
+    /* printf("~~~ GEO AZIMUTH RADS geo: (%f, %f) face: (%f, %f) az: %f\n", g->lat, g->lon, faceCenterGeo[*face].lat, faceCenterGeo[*face].lon, _geo_azimuth); */
+    printf("~~~ FACETHETA geo: (%f, %f) face: %d theta: %f\n", g->lat, g->lon, *face, theta);
+
     printf("### Theta between face primary axis (%f) and R (%f) = (%f)\n", faceAxesAzRadsCII[*face][0], r, theta);
 
     // adjust theta for Class III (odd resolutions)
@@ -455,6 +464,8 @@ void _geoToHex2d(const GeoCoord* g, int res, int* face, Vec2d* v) {
     // convert to local x,y
     v->x = r * cos(theta);
     v->y = r * sin(theta);
+
+    printf("### HEX2D%.15f\t%.15f\t%d\t%d\t%.15f\t%.15f\n", g->lat, g->lon, res, *face, v->x, v->y);
 }
 
 /**
