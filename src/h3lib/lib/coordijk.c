@@ -139,8 +139,9 @@ void _hex2dToCoordIJK(const Vec2d* v, CoordIJK* h) {
     }
 
 
-    printf("ijkijk%.15f\t%.15f\t%d\t%d\t%d\n", v->x, v->y, h->i, h->j, h->k);
     _ijkNormalize(h);
+    /* printf("ijkijk%.15f\t%.15f\t%d\t%d\t%d\n", */
+    /*        v->x, v->y, h->i, h->j, h->k); */
 }
 
 /**

@@ -558,18 +558,30 @@ H3Index _h3Rotate60cw(H3Index h) {
 H3Index _faceIjkToH3(const FaceIJK* fijk, int res) {
     // initialize the index
     H3Index h = H3_INIT;
+    printf("face_ijk_to_h3 BARE INDEX: %llu\n", h);
     H3_SET_MODE(h, H3_HEXAGON_MODE);
+    printf("face_ijk_to_h3 H3 with mode: %llu\n", h);
+    printf("face_ijk_to_h3 H3 with resolution before: %d, index: %llu\n", res, h);
     H3_SET_RESOLUTION(h, res);
+    printf("face_ijk_to_h3 H3 with resolution: %d, index: %llu\n", res, h);
 
     // check for res 0/base cell
     if (res == 0) {
+          printf("res0\n");
         if (fijk->coord.i > MAX_FACE_COORD || fijk->coord.j > MAX_FACE_COORD ||
             fijk->coord.k > MAX_FACE_COORD) {
+
+          printf("invalidindex\n");
+          printf("invalidindex:%d\t%d\t%d\n", fijk->coord.i, fijk->coord.j, fijk->coord.k);
             // out of range input
             return H3_INVALID_INDEX;
         }
 
+
+        H3Index _baseCell = _faceIjkToBaseCell(fijk);
+        H3Index _before = h;
         H3_SET_BASE_CELL(h, _faceIjkToBaseCell(fijk));
+        printf("h3_set_base_cell%llu\t%llu\t%llu\n", _before, _baseCell, h);
         return h;
     }
 

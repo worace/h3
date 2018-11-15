@@ -374,6 +374,7 @@ void _geoToFaceIjk(const GeoCoord* g, int res, FaceIJK* h) {
 
     // then convert to ijk+
     _hex2dToCoordIJK(&v, &h->coord);
+    printf("geo_to_face_ijk%.30f\t%.30f\t%d\t%d\t%d\t%d\t%d\n", g->lat, g->lon, res, h->face, h->coord.i, h->coord.j, h->coord.k);
 }
 
 /**
