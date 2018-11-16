@@ -582,6 +582,7 @@ H3Index _faceIjkToH3(const FaceIJK* fijk, int res) {
         H3Index _before = h;
         H3_SET_BASE_CELL(h, _faceIjkToBaseCell(fijk));
         printf("h3_set_base_cell%llu\t%llu\t%llu\n", _before, _baseCell, h);
+        printf("face_ijk_res_0%d\t%d\t%d\t%d\t%llu\n", fijk->face, fijk->coord.i, fijk->coord.j, fijk->coord.k, h);
         return h;
     }
 
@@ -593,12 +594,16 @@ H3Index _faceIjkToH3(const FaceIJK* fijk, int res) {
     // build the H3Index from finest res up
     // adjust r for the fact that the res 0 base cell offsets the index array
     CoordIJK* ijk = &fijkBC.coord;
+    printf("h3_find_base_cell start res: %d\n", res);
     for (int r = res - 1; r >= 0; r--) {
+        printf("h3_find_base_cell iter r: %d\n", r);
         CoordIJK lastIJK = *ijk;
         CoordIJK lastCenter;
         if (isResClassIII(r + 1)) {
+            printf("h3_find_base_cell previous is resClassIII: %d\n", (r + 1));
             // rotate ccw
             _upAp7(ijk);
+            printf("h3_find_base_cell previous is resClassIII: %d\n", (r + 1));
             lastCenter = *ijk;
             _downAp7(&lastCenter);
         } else {

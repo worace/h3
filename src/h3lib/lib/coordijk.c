@@ -278,6 +278,7 @@ Direction _unitIjkToDigit(const CoordIJK* ijk) {
  * @param ijk The ijk coordinates.
  */
 void _upAp7(CoordIJK* ijk) {
+    CoordIJK start = *ijk;
     // convert to CoordIJ
     int i = ijk->i - ijk->k;
     int j = ijk->j - ijk->k;
@@ -286,6 +287,7 @@ void _upAp7(CoordIJK* ijk) {
     ijk->j = (int)lroundl((i + 2 * j) / 7.0L);
     ijk->k = 0;
     _ijkNormalize(ijk);
+    printf("up_ap7%d\t%d\t%d\t%d\t%d\t%d\n", start.i, start.j, start.k, ijk->i, ijk->j, ijk->k);
 }
 
 /**
@@ -295,6 +297,7 @@ void _upAp7(CoordIJK* ijk) {
  * @param ijk The ijk coordinates.
  */
 void _upAp7r(CoordIJK* ijk) {
+    CoordIJK start = *ijk;
     // convert to CoordIJ
     int i = ijk->i - ijk->k;
     int j = ijk->j - ijk->k;
@@ -303,6 +306,7 @@ void _upAp7r(CoordIJK* ijk) {
     ijk->j = (int)lroundl((3 * j - i) / 7.0L);
     ijk->k = 0;
     _ijkNormalize(ijk);
+    printf("up_ap7rot%d\t%d\t%d\t%d\t%d\t%d\n", start.i, start.j, start.k, ijk->i, ijk->j, ijk->k);
 }
 
 /**
@@ -313,6 +317,7 @@ void _upAp7r(CoordIJK* ijk) {
  * @param ijk The ijk coordinates.
  */
 void _downAp7(CoordIJK* ijk) {
+    CoordIJK start = *ijk;
     // res r unit vectors in res r+1
     CoordIJK iVec = {3, 0, 1};
     CoordIJK jVec = {1, 3, 0};
@@ -326,6 +331,7 @@ void _downAp7(CoordIJK* ijk) {
     _ijkAdd(ijk, &kVec, ijk);
 
     _ijkNormalize(ijk);
+    printf("down_ap7%d\t%d\t%d\t%d\t%d\t%d\n", start.i, start.j, start.k, ijk->i, ijk->j, ijk->k);
 }
 
 /**
@@ -335,6 +341,7 @@ void _downAp7(CoordIJK* ijk) {
  * @param ijk The ijk coordinates.
  */
 void _downAp7r(CoordIJK* ijk) {
+    CoordIJK start = *ijk;
     // res r unit vectors in res r+1
     CoordIJK iVec = {3, 1, 0};
     CoordIJK jVec = {0, 3, 1};
@@ -348,6 +355,7 @@ void _downAp7r(CoordIJK* ijk) {
     _ijkAdd(ijk, &kVec, ijk);
 
     _ijkNormalize(ijk);
+    printf("down_ap7_rot%d\t%d\t%d\t%d\t%d\t%d\n", start.i, start.j, start.k, ijk->i, ijk->j, ijk->k);
 }
 
 /**

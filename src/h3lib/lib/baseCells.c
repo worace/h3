@@ -832,6 +832,8 @@ int _isBaseCellPentagon(int baseCell) {
  * Valid ijk+ lookup coordinates are from (0, 0, 0) to (2, 2, 2).
  */
 int _faceIjkToBaseCell(const FaceIJK* h) {
+  int res = faceIjkBaseCells[h->face][h->coord.i][h->coord.j][h->coord.k].baseCell;
+  printf("faceijktobasecell%d\t%d\t%d\t%d\t%d\n", h->face, h->coord.i, h->coord.j, h->coord.k, res);
     return faceIjkBaseCells[h->face][h->coord.i][h->coord.j][h->coord.k]
         .baseCell;
 }
