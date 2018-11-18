@@ -257,6 +257,7 @@ void _ijkNormalize(CoordIJK* c) {
  * INVALID_DIGIT on failure.
  */
 Direction _unitIjkToDigit(const CoordIJK* ijk) {
+    CoordIJK orig = *ijk;
     CoordIJK c = *ijk;
     _ijkNormalize(&c);
 
@@ -268,6 +269,7 @@ Direction _unitIjkToDigit(const CoordIJK* ijk) {
         }
     }
 
+    printf("unitIJKToDigit%d\t%d\t%d\t%d\n", orig.i, orig.j, orig.k, digit);
     return digit;
 }
 

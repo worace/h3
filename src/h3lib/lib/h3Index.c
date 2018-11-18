@@ -594,16 +594,13 @@ H3Index _faceIjkToH3(const FaceIJK* fijk, int res) {
     // build the H3Index from finest res up
     // adjust r for the fact that the res 0 base cell offsets the index array
     CoordIJK* ijk = &fijkBC.coord;
-    printf("h3_find_base_cell start res: %d\n", res);
+    H3Index start = h;
     for (int r = res - 1; r >= 0; r--) {
-        printf("h3_find_base_cell iter r: %d\n", r);
         CoordIJK lastIJK = *ijk;
         CoordIJK lastCenter;
         if (isResClassIII(r + 1)) {
-            printf("h3_find_base_cell previous is resClassIII: %d\n", (r + 1));
             // rotate ccw
             _upAp7(ijk);
-            printf("h3_find_base_cell previous is resClassIII: %d\n", (r + 1));
             lastCenter = *ijk;
             _downAp7(&lastCenter);
         } else {
@@ -617,8 +614,12 @@ H3Index _faceIjkToH3(const FaceIJK* fijk, int res) {
         _ijkSub(&lastIJK, &lastCenter, &diff);
         _ijkNormalize(&diff);
 
-        H3_SET_INDEX_DIGIT(h, r + 1, _unitIjkToDigit(&diff));
+        H3Index before = h;
+        Direction digit = _unitIjkToDigit(&diff);
+        H3_SET_INDEX_DIGIT(h, r + 1, digit);
+        printf("h3_set_single_digit%llu\t%d\t%d\t%llu\n", before, r+1, digit, h);
     }
+    printf("h3_set_index_digits%llu\t%d\t%d\t%d\t%d\t%d\t%llu\t%d\t%d\t%d\n", start, fijk->face, fijk->coord.i, fijk->coord.j, fijk->coord.k, res, h, fijkBC.coord.i, fijkBC.coord.j, fijkBC.coord.k);
 
     // fijkBC should now hold the IJK of the base cell in the
     // coordinate system of the current face
@@ -632,6 +633,15 @@ H3Index _faceIjkToH3(const FaceIJK* fijk, int res) {
     // lookup the correct base cell
     int baseCell = _faceIjkToBaseCell(&fijkBC);
     H3_SET_BASE_CELL(h, baseCell);
+
+    // UTILS
+    // * [ ] _faceIjkToBaseCellCCWrot60
+    // * [ ] _isBaseCellPentagon
+    // * [ ] _h3LeadingNonZeroDigit
+    // * [ ] _baseCellIsCwOffset
+    // * [ ] _h3Rotate60cw
+    // * [ ] _h3Rotate60ccw
+    // * [ ] _h3RotatePent60ccw
 
     // rotate if necessary to get canonical base cell orientation
     // for this base cell
