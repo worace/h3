@@ -689,8 +689,7 @@ static const BaseCellOrient faceIjkBaseCells[NUM_ICOSA_FACES][3][3][3] = {
  *
  * For each base cell, gives the "home" face and ijk+ coordinates on that face,
  * whether or not the base cell is a pentagon. Additionally, if the base cell
- * is a pentagon, the two cw offset rotation adjacent faces are given (-1
- * indicates that no cw offset rotation faces exist for this base cell).
+ * is a pentagon, the two cw offset rotation adjacent faces are given (-1 * indicates that no cw offset rotation faces exist for this base cell).
  */
 const BaseCellData baseCellData[NUM_BASE_CELLS] = {
 
@@ -820,6 +819,8 @@ const BaseCellData baseCellData[NUM_BASE_CELLS] = {
 
 /** @brief Return whether or not the indicated base cell is a pentagon. */
 int _isBaseCellPentagon(int baseCell) {
+    int res = baseCellData[baseCell].isPentagon;
+    printf("is_base_cell_pentagon%d\t%d\n", baseCell, res);
     return baseCellData[baseCell].isPentagon;
 }
 
@@ -847,8 +848,10 @@ int _faceIjkToBaseCell(const FaceIJK* h) {
  * Valid ijk+ lookup coordinates are from (0, 0, 0) to (2, 2, 2).
  */
 int _faceIjkToBaseCellCCWrot60(const FaceIJK* h) {
-    return faceIjkBaseCells[h->face][h->coord.i][h->coord.j][h->coord.k]
-        .ccwRot60;
+  int res = faceIjkBaseCells[h->face][h->coord.i][h->coord.j][h->coord.k].ccwRot60;
+  printf("face_ijk_to_base_cell_ccw_rot_60%d\t%d\t%d\t%d\t%d\n", h->face, h->coord.i, h->coord.j, h->coord.k, res);
+  return faceIjkBaseCells[h->face][h->coord.i][h->coord.j][h->coord.k]
+    .ccwRot60;
 }
 
 /** @brief Find the FaceIJK given a base cell.

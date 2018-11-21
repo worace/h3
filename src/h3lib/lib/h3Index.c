@@ -466,9 +466,15 @@ int H3_EXPORT(h3IsPentagon)(H3Index h) {
  * @return The highest resolution non-zero digit in the H3Index.
  */
 Direction _h3LeadingNonZeroDigit(H3Index h) {
-    for (int r = 1; r <= H3_GET_RESOLUTION(h); r++)
-        if (H3_GET_INDEX_DIGIT(h, r)) return H3_GET_INDEX_DIGIT(h, r);
+  for (int r = 1; r <= H3_GET_RESOLUTION(h); r++) {
+    if (H3_GET_INDEX_DIGIT(h, r)) {
+      Direction res = H3_GET_INDEX_DIGIT(h, r);
+      printf("highest_resolution_non_zero_digit\%llu\t%d\n", h, res);
+      return H3_GET_INDEX_DIGIT(h, r);
+    };
+  }
 
+  printf("highest_resolution_non_zero_digit\%llu\t0\n", h);
     // if we're here it's all 0's
     return CENTER_DIGIT;
 }
